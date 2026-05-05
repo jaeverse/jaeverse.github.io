@@ -21,7 +21,7 @@ I build things on the side, grow my presence online, and stay locked in on conti
 - Business logic & backend workflows
 - Enterprise system integrations
 
-**Expanding into:**
+**Expanding into:**      
 - JavaScript / TypeScript
 - React & Node.js
 - REST APIs
