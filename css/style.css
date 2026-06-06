@@ -11,31 +11,30 @@ body {
 .header {
     font-family: Quicksand, serif;
     width: 100%;
-    display: inline-flex;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.5rem;
     border-bottom: 2px solid rgb(97, 97, 97);
 }
 
 .header h1 {
+    flex: 0 1 20%;
     height: 100%;
-    width: 20%;
+    min-width: 140px;
     font-size: 30px;
     margin: 0;
     padding: 15px 0;
     text-align: center;
-    /* Boundary */
-    /* border: 1px solid black;   */
 }
 
 .nav-container {
     display: flex;
-    flex-grow: 0;
-    flex-shrink: 0;
-    justify-content: center;
-    align-items: center;
-    width: 50%;
-    margin: 0 auto;
-    gap: 0;
-    /* border: 1px solid rgb(252, 0, 0);   */
+    flex-wrap: nowrap;
+    flex: 0 0 auto;
+    min-width: max-content;
+    margin: 0;
+    gap: 0.5rem;
 }
 
 .nav-container li{
@@ -57,8 +56,8 @@ body {
 }
 
 .contact {
-    width: 20%;
-    /* border: 1px solid rgb(252, 0, 0); */
+    flex: 0 0 auto;
+    min-width: 120px;
 }
 
 .contact a {
