@@ -1,0 +1,38 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    background-color: rgb(255, 245, 207)
+}
+
+.header {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    font-family: Quicksand, sarif;
+    width: 100%;
+    padding: 10px 10px;
+    border-bottom: 1px solid rgb(0, 68, 110);
+    color: rgb(0, 68, 110);
+}
+
+.header h1 {
+    width: 20%;
+}
+
+.nav-container {
+    display: flex;
+    align-items: center;
+
+}
+
+.nav-container li {
+    list-style: none;
+    margin: 0 auto;
+    padding: 0;
+}
+
+.contact {
+
+}
