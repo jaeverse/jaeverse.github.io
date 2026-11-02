@@ -1,0 +1,380 @@
+/* =============================================================
+   wms.css — "How a WMS Works" page (html/wms.html)
+   The floor plan is an SVG; its colours come from the theme
+   variables in base.css, so it works in light and dark mode.
+   ============================================================= */
+
+/* Map on top at full width; details and the step list side by side below it */
+.wms-layout {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+/* ---------- Map container ---------- */
+.wms-map {
+    margin: 0;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    background: var(--color-surface-alt);
+    overflow: hidden;
+}
+
+.wms-map__scroll {
+    overflow-x: auto;
+    padding: 12px;
+}
+
+.wh {
+    width: 100%;
+    min-width: 640px;   /* keeps labels readable; phones scroll sideways */
+    height: auto;
+}
+
+.wms-map__hint {
+    display: none;
+    padding: 0 14px 10px;
+    font-size: 0.8rem;
+    color: var(--color-muted);
+}
+
+/* ---------- Floor plan drawing ---------- */
+.wh-building {
+    fill: var(--color-surface);
+    stroke: var(--color-text);
+    stroke-width: 3;
+}
+
+.wh-door {
+    fill: var(--color-highlight);
+}
+
+.wh-zone {
+    cursor: pointer;
+    transition: opacity 0.4s ease;
+}
+
+.wh-zone__area {
+    fill: transparent;
+    stroke: var(--color-border);
+    stroke-width: 2;
+    stroke-dasharray: 6 5;
+    transition: fill 0.4s ease, stroke 0.4s ease;
+}
+
+.wh-zone:hover .wh-zone__area {
+    stroke: var(--color-accent);
+}
+
+.wh-zone.is-active .wh-zone__area {
+    fill: var(--color-accent-soft);
+    stroke: var(--color-highlight);
+    stroke-dasharray: none;
+}
+
+/* While a step is shown, the other zones fade back */
+.wms-map.has-active .wh-zone:not(.is-active) {
+    opacity: 0.45;
+}
+
+.wh-label {
+    font-family: var(--font-mono);
+    font-size: 15px;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    fill: var(--color-muted);
+}
+
+.wh-label--small {
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.wh-zone.is-active .wh-label {
+    fill: var(--color-text);
+}
+
+.wh-badge {
+    fill: var(--color-accent);
+}
+
+.wh-zone.is-active .wh-badge {
+    fill: var(--color-highlight);
+}
+
+.wh-badge__num {
+    font-family: var(--font-mono);
+    font-size: 13px;
+    font-weight: 700;
+    text-anchor: middle;
+    fill: var(--color-on-accent);
+}
+
+.wh-rack {
+    fill: url(#wh-bins);
+    stroke: var(--color-text);
+    stroke-width: 2;
+}
+
+.wh-bin {
+    fill: var(--color-surface-alt);
+    stroke: var(--color-border);
+    stroke-width: 1.5;
+}
+
+.wh-bench,
+.wh-lane {
+    fill: var(--color-surface-alt);
+    stroke: var(--color-border);
+    stroke-width: 2;
+}
+
+.wh-customer {
+    fill: var(--color-muted);
+}
+
+.wh-pickpath {
+    fill: none;
+    stroke: var(--color-highlight);
+    stroke-width: 3;
+    stroke-dasharray: 2 8;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+}
+
+.wh-zone.is-active .wh-pickpath {
+    opacity: 1;
+    animation: march 0.8s linear infinite;
+}
+
+@keyframes march {
+    to { stroke-dashoffset: -10; }
+}
+
+/* ---------- Moving parts ---------- */
+.wh-truck__trailer {
+    fill: var(--color-accent);
+}
+
+.wh-truck__cab {
+    fill: var(--color-text);
+}
+
+.wh-pallet {
+    fill: #c8915a;   /* wood / cardboard brown reads on both themes */
+    stroke: #8a5a2b;
+    stroke-width: 2;
+}
+
+.wh-pallet--idle {
+    opacity: 0.5;
+}
+
+.wh-pallet__slat {
+    stroke: #8a5a2b;
+    stroke-width: 2;
+}
+
+.wh-ticket {
+    fill: var(--color-surface);
+    stroke: var(--color-accent);
+    stroke-width: 2;
+}
+
+.wh-ticket--idle {
+    opacity: 0.5;
+}
+
+.wh-ticket__line {
+    stroke: var(--color-accent);
+    stroke-width: 2;
+    stroke-linecap: round;
+}
+
+.wh-picker {
+    fill: var(--color-highlight);
+    stroke: var(--color-surface);
+    stroke-width: 3;
+}
+
+.wh-picker__dot {
+    fill: var(--color-surface);
+}
+
+.wh-carton {
+    fill: #c8915a;
+    stroke: #8a5a2b;
+    stroke-width: 2;
+}
+
+.wh-carton__label {
+    fill: #ffffff;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+#wh-carton.is-sealed .wh-carton__label {
+    opacity: 1;
+}
+
+#wh-carton.is-bump {
+    animation: bump 0.4s ease;
+}
+
+@keyframes bump {
+    50% { opacity: 0.6; }
+}
+
+.wh-shipped {
+    font-family: var(--font-mono);
+    font-size: 14px;
+    font-weight: 700;
+    text-anchor: middle;
+    fill: var(--color-success);
+}
+
+.wh .is-hidden {
+    visibility: hidden;
+}
+
+/* ---------- Panel ---------- */
+.wms-panel {
+    display: grid;
+    grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
+    gap: 18px 28px;
+    align-items: start;
+}
+
+.wms-controls {
+    grid-column: 1 / -1;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.wms-controls__toggle {
+    min-width: 92px;
+}
+
+.wms-controls__count {
+    margin-left: auto;
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    color: var(--color-muted);
+    font-variant-numeric: tabular-nums;
+}
+
+.wms-detail {
+    min-height: 300px;
+}
+
+.wms-detail__name {
+    margin-bottom: 8px;
+    font-size: 1.35rem;
+}
+
+.wms-detail__facts {
+    display: grid;
+    gap: 4px;
+    margin: 16px 0 0;
+    font-size: 0.93rem;
+}
+
+.wms-detail__facts dt {
+    margin-top: 8px;
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--color-muted);
+}
+
+.wms-detail__facts dd {
+    margin: 0;
+}
+
+.wms-detail__facts dd.mono {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--color-accent);
+}
+
+/* Step list */
+.wms-steps {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.wms-step {
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
+    width: 100%;
+    padding: 9px 12px;
+    border: 0;
+    border-radius: var(--radius-sm);
+    background: transparent;
+    color: var(--color-muted);
+    font-size: 0.95rem;
+    text-align: left;
+    transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.wms-step:hover {
+    background: var(--color-surface-alt);
+    color: var(--color-text);
+}
+
+.wms-step__num {
+    display: inline-grid;
+    place-items: center;
+    width: 24px;
+    height: 24px;
+    flex-shrink: 0;
+    border-radius: 50%;
+    background: var(--color-surface-alt);
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    font-weight: 700;
+}
+
+.wms-step__sub {
+    display: block;
+    font-size: 0.8rem;
+}
+
+.wms-step.is-done .wms-step__num {
+    background: var(--color-accent);
+    color: var(--color-on-accent);
+}
+
+.wms-step.is-active {
+    background: var(--color-accent-soft);
+    color: var(--color-text);
+    font-weight: 600;
+}
+
+.wms-step.is-active .wms-step__num {
+    background: var(--color-highlight);
+    color: #1c2833;
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 900px) {
+    .wms-panel {
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    .wms-detail {
+        min-height: 0;
+    }
+}
+
+@media (max-width: 700px) {
+    .wms-map__hint {
+        display: block;
+    }
+}

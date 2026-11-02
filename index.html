@@ -3,27 +3,513 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/css/style.css">
-    <title>Jaeverse Porfolio</title>
+    <title>Jae's Portfolio — Jasonne Loresca, WMS Developer</title>
+    <meta name="description" content="Jasonne (Jae) Loresca — WMS developer with four years on HighJump / Körber / Infios Warehouse Advantage.">
 
+    <!-- Social share preview -->
+    <meta property="og:title" content="Jae's Portfolio">
+    <meta property="og:description" content="WMS developer building the systems that keep warehouses moving.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://jaeverse.github.io/">
+    <link rel="canonical" href="https://jaeverse.github.io/">
+    <link rel="icon" href="/assets/images/favicon.svg" type="image/svg+xml">
+
+    <!-- Theme must load first so the page doesn't flash the wrong colours -->
+    <script src="/js/theme-init.js"></script>
+
+    <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Merriweather:ital,opsz,wght@0,18..144,300..900;1,18..144,300..900&family=Quicksand:wght@300..700&family=Work+Sans:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Abril+Fatface&family=JetBrains+Mono:wght@400;600;700&family=Work+Sans:wght@400;500;600;700&display=swap">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="/css/base.css">
+    <link rel="stylesheet" href="/css/layout.css">
+    <link rel="stylesheet" href="/css/components.css">
+    <link rel="stylesheet" href="/css/pages/home.css">
 </head>
-<body>
-    <header class = "header">
-        <h1>Jae-Verse</h1>
-        <nav class = "nav-container">
-            <li><a href="#">Home</a></li>
-            <li><a href="#">Profile</a></li>
-            <li><a href="#">Experience</a></li>
-            <li><a href="#">Projects</a></li>
-            <li><a href="#">Targets</a></li>
-            <li><a href="#">Fun Facts</a></li>
-        </nav>
-        <button class="contact">
-            <a href="#">Contact</a>
-        </button>
-    </header>
+<body data-page="home">
+    <a class="skip-link" href="#main">Skip to content</a>
+
+    <div class="app">
+        <!-- Sidebar + mobile top bar are built by js/components/layout.js -->
+        <aside class="sidebar" id="sidebar" aria-label="Site navigation"></aside>
+
+        <div class="page">
+            <header class="topbar" id="topbar"></header>
+
+            <main class="main" id="main">
+
+                <!-- ================= HERO ================= -->
+                <section class="hero" aria-labelledby="hero-title">
+                    <div>
+                        <p class="hero__hello" data-reveal>👋 Hola! I'm Jasonne — friends call me <strong>Jae</strong>.</p>
+
+                        <h1 class="hero__title" id="hero-title" data-reveal>
+                            I develop the systems that keep <span class="highlight">warehouses</span> moving.
+                        </h1>
+
+                        <p class="hero__roles" data-reveal>
+                            <span aria-hidden="true">&gt; </span><span id="typewriter" aria-hidden="true">WMS Developer</span><span class="typewriter__cursor" aria-hidden="true">&nbsp;</span>
+                            <span class="sr-only">WMS Developer, T-SQL problem solver and Go-Live survivor.</span>
+                        </p>
+
+                        <p class="hero__lead" data-reveal>
+                            Four years on HighJump Warehouse Advantage — now Infios (formerly Körber).
+                            Three years implementing it for clients, including on-site Go-Lives abroad,
+                            and in-house development since 2025. Filipino 🇵🇭, now based in Spain 🇪🇸.
+                        </p>
+
+                        <div class="hero__pills" data-reveal>
+                            <span class="pill">
+                                <span aria-hidden="true">🛠️</span>
+                                <span>Currently: in-house WMS development</span>
+                            </span>
+                            <span class="pill">
+                                <span data-icon="clock"></span>
+                                <span>Time zone: Spain · <span data-tz-abbr>CET</span> (<span data-tz-offset>UTC+1</span>)</span>
+                            </span>
+                        </div>
+
+                        <div class="hero__actions" data-reveal>
+                            <a class="btn btn--primary" href="https://www.linkedin.com/in/jdloresca/" data-link="linkedin" target="_blank" rel="noopener">
+                                <span data-icon="linkedin"></span> Connect on LinkedIn
+                            </a>
+                            <a class="btn btn--ghost" href="/html/wms.html">
+                                <span data-icon="package"></span> See how a WMS works
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- RF scanner: press SCAN for a random fact (js/pages/home.js) -->
+                    <div class="scanner" id="scanner" data-reveal>
+                        <div class="scanner__device">
+                            <div class="scanner__top">
+                                <span><span class="scanner__led" aria-hidden="true"></span>JAE-RF 4000</span>
+                                <span aria-hidden="true">▮▮▮▮▯ 82%</span>
+                            </div>
+
+                            <div class="scanner__screen" id="scanner-screen" aria-live="polite">
+                                <div class="scanner__row"><span class="scanner__key">TASK</span><span class="scanner__value">PICK-FACT</span></div>
+                                <div class="scanner__row"><span class="scanner__key">LOC</span><span class="scanner__value" id="scan-loc">JAE-HQ-01</span></div>
+                                <div class="scanner__row"><span class="scanner__key">ITEM</span><span class="scanner__value" id="scan-item">JAE-0000</span></div>
+                                <div class="scanner__row"><span class="scanner__key">DESC</span><span class="scanner__value" id="scan-desc">Scan the label below to pick a fact about me.</span></div>
+                                <div class="scanner__row"><span class="scanner__key">QTY</span><span class="scanner__value" id="scan-qty">0 / 1</span></div>
+                                <p class="scanner__status" id="scan-status">&gt; READY_</p>
+                            </div>
+
+                            <div class="scanner__keys">
+                                <button class="scanner__trigger" id="scan-button" type="button">SCAN</button>
+                                <button class="scanner__sound" id="scan-sound" type="button" aria-pressed="false" aria-label="Scanner beep sound">
+                                    <span data-icon="volume-x"></span>
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="barcode" id="barcode" aria-hidden="true"></div>
+                        <p class="scanner__hint">A small nod to the RF Guns I develop screens for.</p>
+                    </div>
+                </section>
+
+                <!-- ================= STATS ================= -->
+                <section class="stats" aria-label="Quick numbers">
+                    <div class="stat" data-reveal>
+                        <div class="stat__value"><span data-count-to="4">4</span>+</div>
+                        <p class="stat__label">years on HighJump / Körber / Infios Warehouse Advantage</p>
+                    </div>
+                    <div class="stat" data-reveal style="--reveal-delay: 0.1s">
+                        <div class="stat__value" data-count-to="8">8</div>
+                        <p class="stat__label">certifications &amp; micro-credentials</p>
+                    </div>
+                    <div class="stat" data-reveal style="--reveal-delay: 0.2s">
+                        <div class="stat__value" data-count-to="2">2</div>
+                        <p class="stat__label">sides of the WMS: client implementation and in-house development</p>
+                    </div>
+                </section>
+
+                <!-- ================= WHAT I DO ================= -->
+                <section class="section" aria-labelledby="work-title">
+                    <div class="section__head" data-reveal>
+                        <p class="eyebrow">What I do</p>
+                        <h2 id="work-title">From business requirement to a live warehouse floor</h2>
+                        <p>I turn what a warehouse needs into how its system behaves. And when something doesn't behave, whether it's on the RF Gun, in a WebWise page or deep in a back-end workflow, I trace it back through the process and the data, and ship the hotfix.</p>
+                    </div>
+
+                    <p class="definition" data-reveal>
+                        <dfn class="definition__term">RF Gun</dfn>
+                        <span class="definition__type">noun</span>
+                        The handheld barcode scanner warehouse operators carry. It talks to the WMS over a wireless
+                        (radio frequency) network, so every scan of a pallet, bin or item updates the system in real time.
+                    </p>
+
+                    <div class="card-grid card-grid--four">
+                        <article class="card spotlight" data-reveal>
+                            <div class="card__icon"><span data-icon="layers"></span></div>
+                            <h3>Advantage Architect</h3>
+                            <p>Where system behaviour is shaped, mostly on the RF terminal: the screens, prompts and checks operators work through every shift.</p>
+                            <p class="card__meta">I build: business processes for RF handheld workflows</p>
+                        </article>
+                        <article class="card spotlight" data-reveal style="--reveal-delay: 0.05s">
+                            <div class="card__icon"><span data-icon="layout"></span></div>
+                            <h3>WebWise Page Editor</h3>
+                            <p>Web pages in HighJump / Körber / Infios that pull live data from the database and let users act on it.</p>
+                            <p class="card__meta">I build: pages and reports to user specs</p>
+                        </article>
+                        <article class="card spotlight" data-reveal style="--reveal-delay: 0.1s">
+                            <div class="card__icon"><span data-icon="database"></span></div>
+                            <h3>T-SQL underneath</h3>
+                            <p>The stored procedures behind RF screens, pick/put rules, allocation and putaway. Where the real logic lives.</p>
+                            <p class="card__meta">I write and tune them</p>
+                        </article>
+                        <article class="card spotlight" data-reveal style="--reveal-delay: 0.15s">
+                            <div class="card__icon"><span data-icon="flag"></span></div>
+                            <h3>Go-Lives</h3>
+                            <p>Travelling to different countries to take new warehouses live, on site alongside the people using the system.</p>
+                            <p class="card__meta">Cutover · RF troubleshooting · floor support</p>
+                        </article>
+                    </div>
+                </section>
+
+                <!-- ================= WHAT I DEVELOPED ================= -->
+                <section class="section" aria-labelledby="built-title">
+                    <div class="section__head" data-reveal>
+                        <p class="eyebrow">What I developed</p>
+                        <h2 id="built-title">Shipped to real warehouse floors</h2>
+                        <p>A few of the processes I've designed and built, end to end.</p>
+                    </div>
+
+                    <ol class="builds">
+                        <li class="build build--featured card spotlight" data-reveal>
+                            <div class="build__top">
+                                <span class="build__id">DEV-01</span>
+                                <span class="build__tag">RF · Voice</span>
+                            </div>
+                            <h3>Hybrid Scan + Voice Pick</h3>
+                            <p>Batch and case picking that combines barcode scans with voice-directed prompts, so operators keep their eyes on the shelf and their hands on the stock.</p>
+                        </li>
+                        <li class="build card spotlight" data-reveal style="--reveal-delay: 0.05s">
+                            <div class="build__top">
+                                <span class="build__id">DEV-02</span>
+                                <span class="build__tag">Architect · T-SQL</span>
+                            </div>
+                            <h3>Publisher / Subscriber in Advantage Architect</h3>
+                            <p>Business processes that T-SQL can call directly, so logic in the database can hand work over to the WMS.</p>
+                        </li>
+                        <li class="build card spotlight" data-reveal style="--reveal-delay: 0.1s">
+                            <div class="build__top">
+                                <span class="build__id">DEV-03</span>
+                                <span class="build__tag">Allocation</span>
+                            </div>
+                            <h3>Pick/put rules for transfer orders</h3>
+                            <p>Item allocation by expiry date, so the stock that expires first leaves first, plus the picking flow that follows it.</p>
+                        </li>
+                        <li class="build card spotlight" data-reveal style="--reveal-delay: 0.15s">
+                            <div class="build__top">
+                                <span class="build__id">DEV-04</span>
+                                <span class="build__tag">Kitting</span>
+                            </div>
+                            <h3>Move to Stock</h3>
+                            <p>The kitting process that moves finished kits into stock, ready to be allocated and picked.</p>
+                        </li>
+                        <li class="build card spotlight" data-reveal style="--reveal-delay: 0.2s">
+                            <div class="build__top">
+                                <span class="build__id">DEV-05</span>
+                                <span class="build__tag">Inventory</span>
+                            </div>
+                            <h3>Merge MLP</h3>
+                            <p>Combines two MLPs (master license plates) into one, so the system matches the pallet on the floor.</p>
+                        </li>
+                    </ol>
+                </section>
+
+                <!-- ================= HOW I DELIVER ================= -->
+                <section class="section" aria-labelledby="delivery-title">
+                    <div class="section__head" data-reveal>
+                        <p class="eyebrow">How I deliver</p>
+                        <h2 id="delivery-title">Every change, start to finish</h2>
+                        <p>Writing the code is one step of five. I'm there for all of them.</p>
+                    </div>
+
+                    <ol class="lifecycle">
+                        <li class="lifecycle__step" data-reveal>
+                            <span class="lifecycle__num">01</span>
+                            <h3>Requirements</h3>
+                            <p>Sessions with warehouse managers and operations teams to turn floor problems into system changes.</p>
+                        </li>
+                        <li class="lifecycle__step" data-reveal style="--reveal-delay: 0.05s">
+                            <span class="lifecycle__num">02</span>
+                            <h3>Develop</h3>
+                            <p>Business processes in Advantage Architect, WebWise pages and reports, and the T-SQL behind them.</p>
+                        </li>
+                        <li class="lifecycle__step" data-reveal style="--reveal-delay: 0.1s">
+                            <span class="lifecycle__num">03</span>
+                            <h3>Test &amp; UAT</h3>
+                            <p>Test plans, system testing, and supporting users through acceptance testing.</p>
+                        </li>
+                        <li class="lifecycle__step" data-reveal style="--reveal-delay: 0.15s">
+                            <span class="lifecycle__num">04</span>
+                            <h3>Go-Live</h3>
+                            <p>Cutover, RF device troubleshooting and floor support until operations are stable.</p>
+                        </li>
+                        <li class="lifecycle__step" data-reveal style="--reveal-delay: 0.2s">
+                            <span class="lifecycle__num">05</span>
+                            <h3>Support</h3>
+                            <p>Defect diagnosis, data checks, migrations and upgrades, documentation and end-user training.</p>
+                        </li>
+                    </ol>
+                </section>
+
+                <!-- ================= IN THE FIELD ================= -->
+                <section class="section" aria-labelledby="field-title">
+                    <div class="section__head" data-reveal>
+                        <p class="eyebrow">In the field</p>
+                        <h2 id="field-title">Boarding passes and client sites</h2>
+                        <p>Where I've been on site for a Go-Live, and where the warehouses I've implemented for are.</p>
+                    </div>
+
+                    <h3 class="field__title" data-reveal>Go-Lives I've been on site for</h3>
+                    <ul class="passes">
+                        <li class="pass" data-reveal>
+                            <div class="pass__main">
+                                <span class="pass__label">Go-Live</span>
+                                <span class="pass__code">MEL</span>
+                                <span class="pass__city">Melbourne, Australia</span>
+                            </div>
+                            <div class="pass__stub">
+                                <span class="pass__label">Status</span>
+                                <span class="pass__status">LIVE ✓</span>
+                            </div>
+                        </li>
+                        <li class="pass" data-reveal style="--reveal-delay: 0.05s">
+                            <div class="pass__main">
+                                <span class="pass__label">Go-Live</span>
+                                <span class="pass__code">BNE</span>
+                                <span class="pass__city">Brisbane, Australia</span>
+                            </div>
+                            <div class="pass__stub">
+                                <span class="pass__label">Status</span>
+                                <span class="pass__status">LIVE ✓</span>
+                            </div>
+                        </li>
+                        <li class="pass" data-reveal style="--reveal-delay: 0.1s">
+                            <div class="pass__main">
+                                <span class="pass__label">Go-Live</span>
+                                <span class="pass__code">MKY</span>
+                                <span class="pass__city">Mackay, Australia</span>
+                            </div>
+                            <div class="pass__stub">
+                                <span class="pass__label">Status</span>
+                                <span class="pass__status">LIVE ✓</span>
+                            </div>
+                        </li>
+                    </ul>
+
+                    <h3 class="field__title" data-reveal>Clients I've implemented for, by country</h3>
+                    <ul class="countries">
+                        <li class="country" data-reveal><span class="country__flag" aria-hidden="true">🇦🇺</span><span class="country__name">Australia</span><span class="country__code">AU</span></li>
+                        <li class="country" data-reveal style="--reveal-delay: 0.05s"><span class="country__flag" aria-hidden="true">🇹🇭</span><span class="country__name">Thailand</span><span class="country__code">TH</span></li>
+                        <li class="country" data-reveal style="--reveal-delay: 0.1s"><span class="country__flag" aria-hidden="true">🇲🇾</span><span class="country__name">Malaysia</span><span class="country__code">MY</span></li>
+                        <li class="country" data-reveal style="--reveal-delay: 0.15s"><span class="country__flag" aria-hidden="true">🇱🇰</span><span class="country__name">Sri Lanka</span><span class="country__code">LK</span></li>
+                    </ul>
+                </section>
+
+                <!-- ================= TOOLKIT & CREDENTIALS ================= -->
+                <section class="section" aria-labelledby="toolkit-title">
+                    <div class="section__head" data-reveal>
+                        <p class="eyebrow">Toolkit &amp; credentials</p>
+                        <h2 id="toolkit-title">Certified on the platform I work in</h2>
+                        <p>The tools I use every day, and the certifications behind them.</p>
+                    </div>
+
+                    <div class="toolkit">
+                        <div class="card" data-reveal>
+                            <h3>WMS</h3>
+                            <ul class="chip-list">
+                                <li class="chip">Warehouse Advantage</li>
+                                <li class="chip">Advantage Architect</li>
+                                <li class="chip">WebWise Page Editor</li>
+                                <li class="chip">Order Management System</li>
+                                <li class="chip">RF handheld processes</li>
+                                <li class="chip">Pick/put rules</li>
+                                <li class="chip">Allocation</li>
+                                <li class="chip">Putaway</li>
+                                <li class="chip">Replenishment</li>
+                            </ul>
+                        </div>
+                        <div class="card" data-reveal style="--reveal-delay: 0.05s">
+                            <h3>Development</h3>
+                            <ul class="chip-list">
+                                <li class="chip">T-SQL</li>
+                                <li class="chip">Microsoft SQL Server</li>
+                                <li class="chip">Stored procedures</li>
+                                <li class="chip">C#</li>
+                                <li class="chip">C++</li>
+                                <li class="chip">HTML</li>
+                                <li class="chip">CSS</li>
+                            </ul>
+                        </div>
+                        <div class="card" data-reveal style="--reveal-delay: 0.1s">
+                            <h3>Delivery</h3>
+                            <ul class="chip-list">
+                                <li class="chip">Requirements gathering</li>
+                                <li class="chip">Test plans &amp; UAT</li>
+                                <li class="chip">Go-Live &amp; cutover</li>
+                                <li class="chip">Migrations &amp; upgrades</li>
+                                <li class="chip">JIRA</li>
+                                <li class="chip">Documentation</li>
+                                <li class="chip">End-user training</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="creds">
+                        <ol class="certs" aria-label="Certifications">
+                            <li class="cert" data-reveal>
+                                <span class="cert__icon"><span data-icon="award"></span></span>
+                                <span class="cert__name">Warehouse Advantage Certified Professional</span>
+                                <span class="cert__year">2023</span>
+                            </li>
+                            <li class="cert" data-reveal style="--reveal-delay: 0.05s">
+                                <span class="cert__icon"><span data-icon="award"></span></span>
+                                <span class="cert__name">Körber Core Technical &amp; Product Training</span>
+                                <span class="cert__year">2023</span>
+                            </li>
+                            <li class="cert" data-reveal style="--reveal-delay: 0.1s">
+                                <span class="cert__icon"><span data-icon="award"></span></span>
+                                <span class="cert__name">Warehouse Advantage Certified Associate</span>
+                                <span class="cert__year">2024</span>
+                            </li>
+                            <li class="cert" data-reveal style="--reveal-delay: 0.15s">
+                                <span class="cert__icon"><span data-icon="award"></span></span>
+                                <span class="cert__name">Order Management System Certified Associate</span>
+                                <span class="cert__year">2024</span>
+                            </li>
+                        </ol>
+
+                        <div class="creds__side">
+                            <div class="card" data-reveal>
+                                <p class="creds__label">Micro-credentials · 2024</p>
+                                <ul class="chip-list">
+                                    <li class="chip">Körber One</li>
+                                    <li class="chip">REST Link Advantage</li>
+                                    <li class="chip">Outbound</li>
+                                    <li class="chip">Replenishment</li>
+                                </ul>
+                            </div>
+                            <div class="card" data-reveal style="--reveal-delay: 0.05s">
+                                <p class="creds__label">Education</p>
+                                <p class="creds__degree"><span data-icon="book"></span> BS Computer Engineering</p>
+                                <p>Mapúa Malayan Colleges Laguna, Philippines · 2022</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- ================= JOURNEY ================= -->
+                <section class="section" aria-labelledby="journey-title">
+                    <div class="section__head" data-reveal>
+                        <p class="eyebrow">The journey</p>
+                        <h2 id="journey-title">From the client site to in-house</h2>
+                        <p>Mostly remote, with plenty of airports in between.</p>
+                    </div>
+
+                    <ol class="timeline">
+                        <li class="timeline__item" data-reveal>
+                            <span class="timeline__year">2022 – 2025</span>
+                            <h3>Implementation Support &amp; Consultant</h3>
+                            <p>Implemented Warehouse Advantage for client warehouses: requirements sessions with each operations team, business processes and WebWise pages built to spec, test plans and UAT, and on-site Go-Lives in several countries. Several client accounts in parallel, from first triage to fix and release.</p>
+                        </li>
+                        <li class="timeline__item timeline__item--current" data-reveal>
+                            <span class="timeline__year">2025 – Present</span>
+                            <h3>WMS Developer</h3>
+                            <p>Developing the WMS in-house with warehouse managers and staff: RF processes, WebWise pages and reports, and the T-SQL behind them. I own feature changes, migrations and upgrades from requirements to release.</p>
+                        </li>
+                    </ol>
+                </section>
+
+                <!-- ================= OFF THE CLOCK ================= -->
+                <section class="section" aria-labelledby="interests-title">
+                    <div class="section__head" data-reveal>
+                        <p class="eyebrow">Off the clock</p>
+                        <h2 id="interests-title">What I do when the warehouse is quiet</h2>
+                        <p>Hover or tap a card to flip it.</p>
+                    </div>
+
+                    <!-- Each card: the front is a button that flips it; the back has the details -->
+                    <div class="interests">
+                        <div class="interest" data-reveal>
+                            <div class="interest__inner">
+                                <button class="interest__face interest__front" type="button">
+                                    <span class="interest__emoji" aria-hidden="true">💪</span>
+                                    <span><span class="interest__title">Calisthenics &amp; gym</span><br><span class="interest__hint">Tap to flip</span></span>
+                                </button>
+                                <div class="interest__face interest__face--back">
+                                    <p>Bodyweight strength and gym sessions. Next goal: competing in a calisthenics competition in 2027.</p>
+                                    <button class="interest__unflip" type="button" aria-label="Flip card back">↺</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="interest" data-reveal style="--reveal-delay: 0.05s">
+                            <div class="interest__inner">
+                                <button class="interest__face interest__front" type="button">
+                                    <span class="interest__emoji" aria-hidden="true">🎮</span>
+                                    <span><span class="interest__title">Competitive PC games</span><br><span class="interest__hint">Tap to flip</span></span>
+                                </button>
+                                <div class="interest__face interest__face--back">
+                                    <p>Ranked queues, teamwork, and learning to stay calm under pressure.</p>
+                                    <button class="interest__unflip" type="button" aria-label="Flip card back">↺</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="interest" data-reveal style="--reveal-delay: 0.1s">
+                            <div class="interest__inner">
+                                <button class="interest__face interest__front" type="button">
+                                    <span class="interest__emoji" aria-hidden="true">🖥️</span>
+                                    <span><span class="interest__title">Building PCs</span><br><span class="interest__hint">Tap to flip</span></span>
+                                </button>
+                                <div class="interest__face interest__face--back">
+                                    <p>Picking parts, cable management, first boot. The fun kind of debugging.</p>
+                                    <button class="interest__unflip" type="button" aria-label="Flip card back">↺</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="interest" data-reveal style="--reveal-delay: 0.15s">
+                            <div class="interest__inner">
+                                <button class="interest__face interest__front" type="button">
+                                    <span class="interest__emoji" aria-hidden="true">✈️</span>
+                                    <span><span class="interest__title">Travel</span><br><span class="interest__hint">Tap to flip</span></span>
+                                </button>
+                                <div class="interest__face interest__face--back">
+                                    <p>Go-Lives took me to several countries. Now I travel for the fun part.</p>
+                                    <button class="interest__unflip" type="button" aria-label="Flip card back">↺</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- ================= SAY HI ================= -->
+                <section class="cta-band" aria-labelledby="cta-title" data-reveal>
+                    <div>
+                        <h2 id="cta-title">Let's talk WMS</h2>
+                        <p>Swapping notes on RF processes, WebWise or a stubborn stored procedure? Say hi on LinkedIn.</p>
+                    </div>
+                    <div class="cta-band__actions">
+                        <a class="btn btn--primary" href="https://www.linkedin.com/in/jdloresca/" data-link="linkedin" target="_blank" rel="noopener">
+                            <span data-icon="linkedin"></span> Connect on LinkedIn
+                        </a>
+                        <a class="btn btn--ghost" href="/html/wms.html">
+                            <span data-icon="package"></span> How a WMS works
+                        </a>
+                    </div>
+                </section>
+
+            </main>
+
+            <footer class="footer" id="footer"></footer>
+        </div>
+    </div>
+
+    <script type="module" src="/js/pages/home.js"></script>
 </body>
 </html>

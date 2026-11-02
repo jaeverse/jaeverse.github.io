@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Location not found — Jae's Portfolio</title>
+    <meta name="robots" content="noindex">
+    <link rel="icon" href="/assets/images/favicon.svg" type="image/svg+xml">
+
+    <script src="/js/theme-init.js"></script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Abril+Fatface&family=JetBrains+Mono:wght@400;600;700&family=Work+Sans:wght@400;500;600;700&display=swap">
+
+    <link rel="stylesheet" href="/css/base.css">
+    <link rel="stylesheet" href="/css/layout.css">
+    <link rel="stylesheet" href="/css/components.css">
+</head>
+<!-- GitHub Pages shows this page for any address that doesn't exist. It must stay in the root folder. -->
+<body data-page="404">
+    <a class="skip-link" href="#main">Skip to content</a>
+
+    <div class="app">
+        <aside class="sidebar" id="sidebar" aria-label="Site navigation"></aside>
+
+        <div class="page">
+            <header class="topbar" id="topbar"></header>
+
+            <main class="main" id="main">
+                <div class="empty-state not-found">
+                    <p class="not-found__code mono">ERR 404 · LOC NOT FOUND</p>
+                    <h1>This bin location doesn't exist.</h1>
+                    <p>The page you scanned for isn't in this warehouse. It may have been moved, or the label is wrong.</p>
+                    <p class="not-found__action">
+                        <a class="btn btn--primary" href="/"><span data-icon="home"></span> Back to Home</a>
+                    </p>
+                </div>
+            </main>
+
+            <footer class="footer" id="footer"></footer>
+        </div>
+    </div>
+
+    <script type="module" src="/js/main.js"></script>
+</body>
+</html>
